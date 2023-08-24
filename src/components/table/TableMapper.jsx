@@ -13,7 +13,7 @@ const TableMapper = ({
   setEditMode,
 }) => {
   const [mode, setMode] = useState("dark");
-
+  console.log(tableData)
   function editHandler(id) {
     console.log(id);
     let oldData = tableData.find((data) => data.id === id);
@@ -84,6 +84,7 @@ const TableMapper = ({
               <th scope="col">First Name</th>
               <th scope="col">Last Name</th>
               <th scope="col">Username</th>
+              <th scope="col">File</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -94,6 +95,7 @@ const TableMapper = ({
                 <td>{item.name}</td>
                 <td>{item.about}</td>
                 <td>{item.email}</td>
+                <td>{item.file}</td>
                 <td className="d-flex justify-content-around align-items-center">
                   <span>
                     <BiEdit onClick={() => editHandler(item.id)} />

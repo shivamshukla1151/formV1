@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Button, CloseButton, Container, Form, Spinner } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
+// import { DateRangePicker } from 'rsuite';
+import DateRangePicker from 'react-bootstrap-daterangepicker';
 
 const Submitform = ({
   showForm,
@@ -20,19 +22,9 @@ const Submitform = ({
 
   const [loading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   const storedData = JSON.parse(localStorage.getItem("tableData") || "[]");
-  //   setTableData(storedData);
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem("tableData", JSON.stringify(tableData));
-  // }, [tableData]);
 
   //handle change
   const handleChange = (event, property) => {
-    // console.log(event)
-    // console.log(property)
     setData({
       ...data,
       [property]: event.target.value,
@@ -47,6 +39,7 @@ const Submitform = ({
       password: "",
       confirmPassword: "",
       about: "",
+      file:"",
       gender: "",
     });
 
@@ -60,7 +53,6 @@ const Submitform = ({
   //do signup function
   const submitForm = (event) => {
     event.preventDefault();
-    // console.log(tableData);
     // //validate client side
     if (data.name === undefined || data.name.trim() === "") {
       toast.error("Name is required !!");
@@ -190,7 +182,24 @@ const Submitform = ({
             />
           </div>
         </Form.Group>
+        <Form.Group className="mb-3" controlId="formFile">
+          <Form.Label>Upload File</Form.Label>
+          <Form.Control
+            type="file"
+            placeholder="upload file"
+            onChange={(event) => handleChange(event, "file")}
+            // isInvalid={errorData.errorData?.response?.data?.email}
+          />
+          </Form.Group>
 
+          <Form.Group>
+            <Form.Label>Date Range</Form.Label>
+            <DateRangePicker
+        initialSettings={{ startDate: '1/1/2014', endDate: '3/1/2014' }}
+      >
+        <button className="btn btn-outline-secondary mx-3">Click Me To Open Picker!</button>
+      </DateRangePicker>
+          </Form.Group>
         {/* about field  */}
 
         <Form.Group className="mb-2">
